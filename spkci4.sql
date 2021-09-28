@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2021 at 05:09 AM
+-- Generation Time: Sep 28, 2021 at 06:23 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -78,17 +78,19 @@ CREATE TABLE `klasifikasi` (
 --
 
 CREATE TABLE `kriteria` (
-  `id_kriteria` int(11) NOT NULL,
-  `kriteria` varchar(225) NOT NULL
+  `id` int(11) NOT NULL,
+  `id_kriteria` varchar(5) NOT NULL,
+  `kriteria` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kriteria`
 --
 
-INSERT INTO `kriteria` (`id_kriteria`, `kriteria`) VALUES
-(10, 'ujaha'),
-(12, 'eded');
+INSERT INTO `kriteria` (`id`, `id_kriteria`, `kriteria`) VALUES
+(4, 'C1', 'Tidak Mendapatkan Bansos'),
+(5, 'C2', 'Kehilangan Pekerjaan/tidak mendapatkan cadangan makanan selama 3 bulan ke depan'),
+(6, 'C3', 'Mempunyai anggota keluarga yang terkena penyakit menahun / kronis');
 
 -- --------------------------------------------------------
 
@@ -194,7 +196,7 @@ ALTER TABLE `klasifikasi`
 -- Indexes for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  ADD PRIMARY KEY (`id_kriteria`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `penduduk`
@@ -247,7 +249,7 @@ ALTER TABLE `klasifikasi`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `penduduk`
@@ -282,14 +284,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `klasifikasi`
   ADD CONSTRAINT `klasifikasi_ibfk_1` FOREIGN KEY (`id_alternatif`) REFERENCES `alternatif` (`id_alternatif`),
-  ADD CONSTRAINT `klasifikasi_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`),
   ADD CONSTRAINT `klasifikasi_ibfk_3` FOREIGN KEY (`id_subkriteria`) REFERENCES `subkriteria` (`id_subkriteria`);
-
---
--- Constraints for table `subkriteria`
---
-ALTER TABLE `subkriteria`
-  ADD CONSTRAINT `subkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
