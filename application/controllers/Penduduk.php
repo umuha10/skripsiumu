@@ -13,6 +13,9 @@ class Penduduk extends CI_Controller
     {
         $data['judul'] = 'Data Penduduk';
         $data['row'] = $this->Inputpenduduk_model->getAllPenduduk();
+        $data['kriteria_penyakit'] = $this->Inputpenduduk_model->getKriteria('C3');
+        $data['kriteria_kerja'] = $this->Inputpenduduk_model->getKriteria('C2');
+        $data['kriteria_bansos'] = $this->Inputpenduduk_model->getKriteria('C1');
         $this->template->load('template', 'penduduk/input_penduduk', $data);
     }
 

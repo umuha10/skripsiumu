@@ -2,6 +2,13 @@
 
 class Inputpenduduk_model extends CI_Model
 {
+    public function getKriteria($id_kriteria)
+    {
+        $query = "SELECT kriteria.id_kriteria, subkriteria.subkriteria, subkriteria.bobot FROM kriteria JOIN subkriteria ON kriteria.id = subkriteria.id_kriteria WHERE kriteria.id_kriteria = '$id_kriteria'";
+
+        return $this->db->query($query);
+    }
+
     public function getAllPenduduk()
     {
         $this->db->from('penduduk');
@@ -18,7 +25,7 @@ class Inputpenduduk_model extends CI_Model
             'nama' => $post['k_penduduk'],
             'jenis_kelamin' => $post['l_penduduk'],
             'alamat' => $post['o_penduduk'],
-            'pekerjaan' => $post['p_penduduk'],
+            'bekerja' => $post['p_penduduk'],
             'riwayat_penyakit' => $post['q_penduduk'],
             'bansos_Diterima' => $post['r_penduduk'],
         ];
@@ -34,7 +41,7 @@ class Inputpenduduk_model extends CI_Model
             'nama' => $post['c_penduduk'],
             'jenis_kelamin' => $post['d_penduduk'],
             'alamat' => $post['g_penduduk'],
-            'pekerjaan' => $post['h_penduduk'],
+            'bekerja' => $post['h_penduduk'],
             'riwayat_penyakit' => $post['x_penduduk'],
             'bansos_Diterima' => $post['y_penduduk'],
         ];

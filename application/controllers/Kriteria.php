@@ -24,18 +24,32 @@ class Kriteria extends CI_Controller
         $this->template->load('template', 'subkriteria/input_subkriteria', $data);
     }
 
-    public function proses()
+    public function proses($page = NULL)
     {
         $post = $this->input->post(null, TRUE);
-        if (isset($post['insert'])) {
-            $this->Inputkriteria_model->tambahDataKriteria($post);
-            redirect('kriteria');
-        }
-        if (isset($post['update'])) {
-            $this->Inputkriteria_model->updateDataKriteria($post);
-            redirect('kriteria');
+        if ($page == "subkriteria") {
+            var_dump($page);
+            if (isset($post['insert'])) {
+                $this->Inputkriteria_model->tambahDataSubKriteria($post);
+                redirect('kriteria/subkriteria');
+            }
+            if (isset($post['update'])) {
+                $this->Inputkriteria_model->updateDataSubKriteria($post);
+                redirect('kriteria/subkriteria');
+            } else {
+                redirect('kriteria/subkriteria');
+            }
         } else {
-            redirect('kriteria');
+            if (isset($post['insert'])) {
+                $this->Inputkriteria_model->tambahDataKriteria($post);
+                redirect('kriteria');
+            }
+            if (isset($post['update'])) {
+                $this->Inputkriteria_model->updateDataKriteria($post);
+                redirect('kriteria');
+            } else {
+                redirect('kriteria');
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import numpy as np
 import pandas as pd
@@ -9,14 +9,14 @@ CORS(app)
 def normalisasi_matrik(C):
     X = 0
     for i in C:
-        X += i**2
+        X += int(i)**2
     
     return np.sqrt(X)
 
-def predict_model():
+def predict_model(dataset):
     kriteria = ["tidak dapat bansos", "kehilangan pekerjaan", "penyakit kronis"]
     rule = ["0,1", "0,2", "1,2"]
-    skor = [5, 7, 2]
+    skor = [5, 7, 1]
 
     index_rule = 0
     myRule = rule[index_rule]
@@ -119,10 +119,12 @@ def predict_model():
 
     bobot_topsis = rerata_list_jumlah_eigen
 
-    dataset = pd.read_excel("dataset/Dataset.xlsx")
+    # dataset = pd.read_excel("dataset/Dataset.xlsx")
     dataset.columns = ['Alternatif', "C1", "C2", "C3"]
 
     # tabel_matriks_nilai_alternatif = list()
+
+    print(dataset)
 
     tb_matriks_nilai_alternatif_df = dataset.copy()
 
@@ -148,7 +150,7 @@ def predict_model():
         temp = list()
         a = tb_matriks_nilai_alternatif_df[k]
         for b in a:
-            temp.append(b)
+            temp.append(int(b))
         prepare_tabel_normalisasi.append(temp)
 
     tabel_matriks_normalisasi = list()
@@ -156,7 +158,10 @@ def predict_model():
     for i in range(len(prepare_tabel_normalisasi)):
         temp = list()
         for j in range(len(prepare_tabel_normalisasi[0])):
-            normalisasi = prepare_tabel_normalisasi[i][j] / Xs[i]
+            try:
+                normalisasi = prepare_tabel_normalisasi[i][j] / Xs[i]
+            except:
+                normalisasi = 0
             temp.append(normalisasi)
         tabel_matriks_normalisasi.append(temp)
 
@@ -212,13 +217,34 @@ def predict_model():
 
     return sorted_ranking
 
-@app.route('/calculate', methods=['GET'])
+@app.route('/calculate', methods=['POST', 'GET'])
 def index():
-    ranking = predict_model()
 
-    data = {"data": str(ranking)}
+    print(request.json)
+    json_data = request.json
 
-    print(data)
+    dataset = []
+    nama = []
+
+    for jd in json_data:
+        nama.append(jd['no_kk'])
+        dataset.append([jd['nama'], jd['bansos_diterima'], jd['bekerja'], jd['riwayat_penyakit']])
+
+    dataset = pd.DataFrame(dataset)
+
+    ranking = predict_model(dataset)
+
+    latest_ranking = {}
+
+    for d in ranking:
+        latest_ranking[str(d)] = nama[d]
+
+    latest_ranking = dict(latest_ranking)
+
+    print(ranking)
+    print(latest_ranking)
+
+    data = {"data": str(latest_ranking)}
 
     return jsonify(data), 200
 

@@ -88,7 +88,7 @@
 						</ul>
 					</li>
 
-					<li class="sub-menu">
+					<!-- <li class="sub-menu">
 						<a href="javascript:;">
 							<i class="fa fa-database" aria-hidden="true"></i>
 							<span>Data Alternatif</span>
@@ -97,10 +97,10 @@
 							<li><a href="<?= base_url(); ?>Alternatif/index">Input Data Alternatif</a></li>
 							<li><a href="buttons.html">Nilai Bobot Alternatif</a></li>
 						</ul>
-					</li>
+					</li> -->
 
 					<li class="sub-menu">
-						<a href="javascript:;">
+						<a href="<?= base_url(); ?>Perhitungan/index">
 							<i class="fa fa-calculator" aria-hidden="true"></i>
 							<span>Perhitungan</span>
 						</a>
@@ -159,6 +159,8 @@
 		</footer>
 		<!--footer end-->
 	</section>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="<?= base_url() ?>assets/template/lib/jquery/jquery.min.js"></script>
 	<script src="<?= base_url() ?>assets/template/lib/bootstrap/js/bootstrap.min.js"></script>
