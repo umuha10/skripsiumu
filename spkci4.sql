@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2021 at 06:23 PM
+-- Generation Time: Oct 09, 2021 at 05:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -43,20 +43,9 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `alternatif` (
   `id_alternatif` int(11) NOT NULL,
-  `nama_alternatif` varchar(11) NOT NULL,
-  `bobot` int(225) NOT NULL
+  `id_kriteria` int(11) NOT NULL,
+  `id_penduduk` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `alternatif`
---
-
-INSERT INTO `alternatif` (`id_alternatif`, `nama_alternatif`, `bobot`) VALUES
-(1, 'umu habibah', 10),
-(2, 'sdew', 34),
-(3, 'uumsdbsd', 80),
-(4, 'ASAD', 45),
-(5, 'aesc', 45);
 
 -- --------------------------------------------------------
 
@@ -104,19 +93,20 @@ CREATE TABLE `penduduk` (
   `nama` varchar(225) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
   `alamat` varchar(225) NOT NULL,
-  `pekerjaan` varchar(225) NOT NULL,
-  `riwayat_penyakit` varchar(200) NOT NULL,
-  `bansos_diterima` varchar(200) NOT NULL
+  `bekerja` int(11) NOT NULL,
+  `riwayat_penyakit` int(11) NOT NULL,
+  `bansos_diterima` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `penduduk`
 --
 
-INSERT INTO `penduduk` (`no_kk`, `nik`, `nama`, `jenis_kelamin`, `alamat`, `pekerjaan`, `riwayat_penyakit`, `bansos_diterima`) VALUES
-(330409501093434, 3304095010980002, 'UMU HABIBAH', 'P', 'PEKANDANGAN', 'MAHASISWA', 'CORONA', 'PKH'),
-(3304095010980002, 3304095010980002, 'ZAENAL ARIFIN', 'L', 'PEKANDANGAN', 'PETANI', 'CORONA', '-'),
-(3304096909000001, 3304096909000001, 'KHUSNUL KHOFIFAH', 'P', 'PEKANDANGAN', 'MAHASISWA', 'TIPES', 'BPNT');
+INSERT INTO `penduduk` (`no_kk`, `nik`, `nama`, `jenis_kelamin`, `alamat`, `bekerja`, `riwayat_penyakit`, `bansos_diterima`) VALUES
+(330409501093434, 3304095010980002, 'UMU HABIBAH', 'P', 'PEKANDANGAN', 5, 1, 3),
+(3304095010980002, 3304095010980002, 'ZAENAL ARIFIN', 'L', 'PEKANDANGAN', 5, 5, 5),
+(3304095011980002, 3304095011980002, 'LINA', 'P', 'PEKANDANGAN', 1, 1, 3),
+(3304096909000001, 3304096909000001, 'KHUSNUL KHOFIFAH', 'P', 'PEKANDANGAN', 5, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -135,14 +125,40 @@ CREATE TABLE `priority` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skor_alternatif`
+--
+
+CREATE TABLE `skor_alternatif` (
+  `id_skor` int(11) NOT NULL,
+  `id_alternatif` int(11) NOT NULL,
+  `id_subkriteria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subkriteria`
 --
 
 CREATE TABLE `subkriteria` (
   `id_subkriteria` int(11) NOT NULL,
   `subkriteria` varchar(225) NOT NULL,
-  `id_kriteria` int(11) NOT NULL
+  `id_kriteria` int(11) NOT NULL,
+  `bobot` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subkriteria`
+--
+
+INSERT INTO `subkriteria` (`id_subkriteria`, `subkriteria`, `id_kriteria`, `bobot`) VALUES
+(1, 'Tidak Pernah Menerima', 4, 5),
+(3, 'Pernah Menerima', 4, 3),
+(4, 'Sedang Menerima', 4, 1),
+(5, 'Kehilangan Pekerjaan / Tidak memiliki cadangan makanan 3 bulan kedepan', 5, 5),
+(6, 'Tidak kehilangan Perkejaan / Memiliki cadangan makanan 3 bulan kedepan', 5, 1),
+(7, 'Kronis dan atau Rentan', 6, 5),
+(8, 'Tidak memiliki anggota keluarga yang rentan / kronis', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -211,6 +227,12 @@ ALTER TABLE `priority`
   ADD PRIMARY KEY (`id_priority`);
 
 --
+-- Indexes for table `skor_alternatif`
+--
+ALTER TABLE `skor_alternatif`
+  ADD PRIMARY KEY (`id_skor`);
+
+--
 -- Indexes for table `subkriteria`
 --
 ALTER TABLE `subkriteria`
@@ -237,7 +259,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `klasifikasi`
@@ -264,10 +286,16 @@ ALTER TABLE `priority`
   MODIFY `id_priority` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `skor_alternatif`
+--
+ALTER TABLE `skor_alternatif`
+  MODIFY `id_skor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `subkriteria`
 --
 ALTER TABLE `subkriteria`
-  MODIFY `id_subkriteria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_subkriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -283,7 +311,6 @@ ALTER TABLE `user`
 -- Constraints for table `klasifikasi`
 --
 ALTER TABLE `klasifikasi`
-  ADD CONSTRAINT `klasifikasi_ibfk_1` FOREIGN KEY (`id_alternatif`) REFERENCES `alternatif` (`id_alternatif`),
   ADD CONSTRAINT `klasifikasi_ibfk_3` FOREIGN KEY (`id_subkriteria`) REFERENCES `subkriteria` (`id_subkriteria`);
 COMMIT;
 
