@@ -236,8 +236,10 @@ def index():
 
     latest_ranking = {}
 
+    r = 1
     for d in ranking:
-        latest_ranking[str(d)] = nama[d]
+        latest_ranking[str(d)] = {'KK': nama[d], 'ranking': r}
+        r += 1
 
     latest_ranking = dict(latest_ranking)
 

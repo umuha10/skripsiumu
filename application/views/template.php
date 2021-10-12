@@ -21,6 +21,8 @@
 	<link href="<?= base_url() ?>assets/template/css/style.css" rel="stylesheet">
 	<link href="<?= base_url() ?>assets/template/css/style-responsive.css" rel="stylesheet">
 
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
 	<!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -106,19 +108,19 @@
 						</a>
 					</li>
 
-					<li class="sub-menu">
+					<!-- <li class="sub-menu">
 						<a href="javascript:;">
 							<i class="fa fa-area-chart" aria-hidden="true"></i>
 							<span>Hasil Perangkingan</span>
 						</a>
-					</li>
+					</li> -->
 
-					<li class="sub-menu">
+					<!-- <li class="sub-menu">
 						<a href="javascript:;">
 							<i class="fa fa-sun-o" aria-hidden="true"></i>
 							<span>Pengaturan</span>
 						</a>
-					</li>
+					</li> -->
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -172,6 +174,14 @@
 	<!--common script for all pages-->
 	<script src="<?= base_url() ?>assets/template/lib/common-scripts.js"></script>
 	<!--script for this page-->
+
+	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#myTable').DataTable();
+		});
+	</script>
 
 </body>
 
