@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2021 at 05:59 AM
+-- Generation Time: Oct 12, 2021 at 04:23 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,45 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `spkci4`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `id_admin` int(11) NOT NULL,
-  `username` varchar(225) NOT NULL,
-  `password` varchar(225) NOT NULL,
-  `nama_lengkap` varchar(225) NOT NULL,
-  `level` enum('admin','user') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `alternatif`
---
-
-CREATE TABLE `alternatif` (
-  `id_alternatif` int(11) NOT NULL,
-  `id_kriteria` int(11) NOT NULL,
-  `id_penduduk` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `klasifikasi`
---
-
-CREATE TABLE `klasifikasi` (
-  `id_klasifikasi` int(11) NOT NULL,
-  `id_alternatif` int(11) NOT NULL,
-  `id_kriteria` int(11) NOT NULL,
-  `id_subkriteria` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -107,32 +68,6 @@ INSERT INTO `penduduk` (`no_kk`, `nik`, `nama`, `jenis_kelamin`, `alamat`, `beke
 (3304095010980002, 3304095010980002, 'ZAENAL ARIFIN', 'L', 'PEKANDANGAN', 5, 5, 5),
 (3304095011980002, 3304095011980002, 'LINA', 'P', 'PEKANDANGAN', 1, 1, 3),
 (3304096909000001, 3304096909000001, 'KHUSNUL KHOFIFAH', 'P', 'PEKANDANGAN', 5, 1, 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `priority`
---
-
-CREATE TABLE `priority` (
-  `id_priority` int(11) NOT NULL,
-  `parent` int(225) NOT NULL,
-  `id` int(11) NOT NULL,
-  `vektor` int(225) NOT NULL,
-  `param` int(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `skor_alternatif`
---
-
-CREATE TABLE `skor_alternatif` (
-  `id_skor` int(11) NOT NULL,
-  `id_alternatif` int(11) NOT NULL,
-  `id_subkriteria` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -188,27 +123,6 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `alamat`, `level`
 --
 
 --
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id_admin`);
-
---
--- Indexes for table `alternatif`
---
-ALTER TABLE `alternatif`
-  ADD PRIMARY KEY (`id_alternatif`);
-
---
--- Indexes for table `klasifikasi`
---
-ALTER TABLE `klasifikasi`
-  ADD PRIMARY KEY (`id_klasifikasi`),
-  ADD KEY `klasifikasi_ibfk_1` (`id_alternatif`),
-  ADD KEY `klasifikasi_ibfk_2` (`id_kriteria`),
-  ADD KEY `klasifikasi_ibfk_3` (`id_subkriteria`);
-
---
 -- Indexes for table `kriteria`
 --
 ALTER TABLE `kriteria`
@@ -219,18 +133,6 @@ ALTER TABLE `kriteria`
 --
 ALTER TABLE `penduduk`
   ADD PRIMARY KEY (`no_kk`);
-
---
--- Indexes for table `priority`
---
-ALTER TABLE `priority`
-  ADD PRIMARY KEY (`id_priority`);
-
---
--- Indexes for table `skor_alternatif`
---
-ALTER TABLE `skor_alternatif`
-  ADD PRIMARY KEY (`id_skor`);
 
 --
 -- Indexes for table `subkriteria`
@@ -250,24 +152,6 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `alternatif`
---
-ALTER TABLE `alternatif`
-  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `klasifikasi`
---
-ALTER TABLE `klasifikasi`
-  MODIFY `id_klasifikasi` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
@@ -280,18 +164,6 @@ ALTER TABLE `penduduk`
   MODIFY `no_kk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3304096909000002;
 
 --
--- AUTO_INCREMENT for table `priority`
---
-ALTER TABLE `priority`
-  MODIFY `id_priority` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `skor_alternatif`
---
-ALTER TABLE `skor_alternatif`
-  MODIFY `id_skor` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `subkriteria`
 --
 ALTER TABLE `subkriteria`
@@ -302,16 +174,6 @@ ALTER TABLE `subkriteria`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `klasifikasi`
---
-ALTER TABLE `klasifikasi`
-  ADD CONSTRAINT `klasifikasi_ibfk_3` FOREIGN KEY (`id_subkriteria`) REFERENCES `subkriteria` (`id_subkriteria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
