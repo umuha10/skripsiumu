@@ -8,6 +8,7 @@ class Auth extends CI_Controller
         $data['judul'] = 'Login';
         $this->load->view('login', $data);
     }
+
     public function proses()
     {
         $post = $this->input->post(null, TRUE);
@@ -18,6 +19,7 @@ class Auth extends CI_Controller
                 $row = $query->row();
                 $params = array(
                     'iduser' => $row->id_user,
+                    'username' => $row->username,
                     'level' => $row->level
                 );
                 $this->session->set_userdata($params);

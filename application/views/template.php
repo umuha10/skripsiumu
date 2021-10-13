@@ -65,8 +65,8 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
-					<p class="centered"><a href="profile.html"><img src="<?= base_url() ?>assets/template/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-					<h5 class="centered">Sam Soffes</h5>
+					<p class="centered"><a href="#!"><img src="<?= base_url() ?>assets/user/user.jpg" class="img-circle" width="80"></a></p>
+					<h5 class="centered"><?= $this->session->userdata('username') ?></h5>
 
 					<!-- Mba umu ini sidebar yang ga ada dropdownnya, tinggal copy dan ubah nama di spannya -->
 					<li class="mt">
@@ -77,7 +77,7 @@
 					</li>
 
 					<li class="sub-menu">
-						<a href="<?= base_url(); ?>Penduduk/index">
+						<a href="<?= base_url(); ?>penduduk">
 							<i class="fa fa-desktop"></i>
 							<span>Data Penduduk</span>
 						</a>
@@ -90,8 +90,8 @@
 							<span>Data Kriteria</span>
 						</a>
 						<ul class="sub">
-							<li><a href="<?= base_url(); ?>Kriteria/index">Input Data Kriteria</a></li>
-							<li><a href="<?= base_url(); ?>Kriteria/subkriteria">Nilai Bobot Kriteria</a></li>
+							<li><a href="<?= base_url(); ?>kriteria">Input Data Kriteria</a></li>
+							<li><a href="<?= base_url(); ?>subkriteria">Nilai Bobot Kriteria</a></li>
 						</ul>
 					</li>
 
@@ -107,7 +107,7 @@
 					</li> -->
 
 					<li class="sub-menu">
-						<a href="<?= base_url(); ?>Perhitungan/index">
+						<a href="<?= base_url(); ?>perhitungan">
 							<i class="fa fa-calculator" aria-hidden="true"></i>
 							<span>Perhitungan</span>
 						</a>
@@ -147,7 +147,7 @@
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				<p>
+				<p translate="no">
 					&copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
 				</p>
 				<div class="credits">

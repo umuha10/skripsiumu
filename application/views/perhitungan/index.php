@@ -47,8 +47,6 @@
 		let temp = ``;
 		let peringkat = 1;
 
-		// console.log('hasil', data);
-
 		let hasil = [];
 
 		data.forEach(dt => {

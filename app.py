@@ -43,7 +43,7 @@ def predict_model(dataset):
                     temp.append(nilai)
                     
         tabel_matrik.append(temp)
-        print()
+        # print()
 
     tabel_matrik_df = pd.DataFrame(tabel_matrik, columns=kriteria)
 
@@ -124,7 +124,7 @@ def predict_model(dataset):
 
     # tabel_matriks_nilai_alternatif = list()
 
-    print(dataset)
+    # print(dataset)
 
     tb_matriks_nilai_alternatif_df = dataset.copy()
 
@@ -220,7 +220,7 @@ def predict_model(dataset):
 @app.route('/calculate', methods=['POST', 'GET'])
 def index():
 
-    print(request.json)
+    # print(request.json)
     json_data = request.json
 
     dataset = []
@@ -243,8 +243,8 @@ def index():
 
     latest_ranking = dict(latest_ranking)
 
-    print(ranking)
-    print(latest_ranking)
+    # print(ranking)
+    # print(latest_ranking)
 
     data = {"data": str(latest_ranking)}
 
