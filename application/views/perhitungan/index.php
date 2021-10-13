@@ -20,8 +20,7 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody id="tabel_peringkat">
-				</tbody>
+				<tbody id="tabel_peringkat"></tbody>
 			</table>
 		</div>
 	</div>
@@ -48,7 +47,7 @@
 		let temp = ``;
 		let peringkat = 1;
 
-		console.log('hasil', data);
+		// console.log('hasil', data);
 
 		let hasil = [];
 
@@ -86,14 +85,14 @@
 		let tempHasil = [];
 
 		for(let h in hasil) {
-			tempHasil.push({id: h, KK: hasil[h].KK, ranking: hasil[h].ranking})
+			tempHasil.push({id: h, KK: hasil[h].KK, ranking: hasil[h].ranking});
 		}
 
 		if (orderBy == 'ASC') {
 			let sortable = [];
 
 			for (h in hasil) {
-				sortable.push([h, hasil[h].ranking])
+				sortable.push([h, hasil[h].ranking]);
 			}
 
 			sortable.sort((a, b) => {
@@ -115,7 +114,7 @@
 			let sortable = [];
 
 			for (h in hasil) {
-				sortable.push([h, hasil[h].ranking])
+				sortable.push([h, hasil[h].ranking]);
 			}
 
 			sortable.sort((a, b) => {
@@ -137,7 +136,7 @@
 
 		drawTable(result, finalResult);
 
-		console.log(orderBy)
+		console.log(orderBy);
 	}
 
 	const showData = async () => {
@@ -160,6 +159,6 @@
 	}
 
 	window.addEventListener('load', async () => {
-		await showData()
+		await showData();
 	})
 </script>
