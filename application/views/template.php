@@ -21,7 +21,12 @@
 	<link href="<?= base_url() ?>assets/template/css/style.css" rel="stylesheet">
 	<link href="<?= base_url() ?>assets/template/css/style-responsive.css" rel="stylesheet">
 
+	<!-- Data Table -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+	<!-- Material Icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 	<!-- =======================================================
     Template Name: Dashio
