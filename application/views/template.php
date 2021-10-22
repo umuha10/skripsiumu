@@ -76,7 +76,7 @@
 
 					<li class="sub-menu">
 						<a href="<?= base_url(); ?>Penduduk/index">
-							<i class="fas fa-database"></i>
+							<i class="fa fa-database"></i>
 							<span>Data Penduduk</span>
 						</a>
 					</li>
