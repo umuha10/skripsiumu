@@ -23,6 +23,9 @@
 
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 
+	<!-- Material Icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -73,7 +76,7 @@
 
 					<li class="sub-menu">
 						<a href="<?= base_url(); ?>Penduduk/index">
-							<i class="fa fa-desktop"></i>
+							<i class="fas fa-database"></i>
 							<span>Data Penduduk</span>
 						</a>
 					</li>
