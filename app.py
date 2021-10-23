@@ -3,6 +3,38 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 
+# library for database connection
+import pymysql.cursors
+
+# ============================================================================
+#                                 DATABASE
+# ============================================================================
+#   Database Configuration
+#
+DB_SERVER = "localhost"
+DB_USERNAME = "root"
+DB_PASSWORD = ""
+DB_NAME = "umu_ahp_topsis"
+
+conn = cursor = None
+
+def open_DB():
+    global conn, cursor
+    
+    conn = pymysql.connect(host=DB_SERVER, user=DB_USERNAME, password=DB_PASSWORD, database=DB_NAME)
+    cursor = conn.cursor()
+
+def close_DB():
+    global conn, cursor
+    
+    conn.close()
+    cursor.close()
+
+
+# ============================================================================
+#                                 KONFIGURASI
+# ============================================================================
+
 app = Flask(__name__)
 CORS(app)
 
@@ -14,9 +46,34 @@ def normalisasi_matrik(C):
     return np.sqrt(X)
 
 def predict_model(dataset):
-    kriteria = ["tidak dapat bansos", "kehilangan pekerjaan", "penyakit kronis"]
-    rule = ["0,1", "0,2", "1,2"]
-    skor = [5, 7, 1]
+    open_DB()
+
+    # kriteria = ["tidak dapat bansos", "kehilangan pekerjaan", "penyakit kronis"]
+    kriteria = []
+
+    sql = "SELECT * FROM kriteria";
+    cursor.execute(sql)
+    results = cursor.fetchall()
+
+    # print(results)
+    for r in results:
+        # print(r[2])
+        kriteria.append(r[2])
+
+    total_kriteria = len(kriteria)
+
+    rule = []
+
+    if total_kriteria > 0:
+        for baris in range(total_kriteria):
+            for kolom in range(total_kriteria):
+                if baris < kolom:
+                    text_baris = str(baris)
+                    text_kolom = str(kolom)
+                    rule.append(text_baris + ',' + text_kolom)
+
+    # rule = ["0,1", "0,2", "1,2"]
+    skor = [5, 7, 1] #minta kejelasan nanti
 
     index_rule = 0
     myRule = rule[index_rule]
@@ -120,8 +177,16 @@ def predict_model(dataset):
     bobot_topsis = rerata_list_jumlah_eigen
 
     # dataset = pd.read_excel("dataset/Dataset.xlsx")
-    dataset.columns = ['Alternatif', "C1", "C2", "C3"]
+    # dataset.columns = ['Alternatif', "C1", "C2", "C3"]
+    columns = ['Alternatif']
+    kriteria = []
+    
+    for tk in range(total_kriteria):
+        temp_col = 'C' + str(tk+1)
+        kriteria.append(temp_col)
+        columns.append(temp_col)
 
+    dataset.columns = columns
     # tabel_matriks_nilai_alternatif = list()
 
     # print(dataset)
@@ -145,7 +210,7 @@ def predict_model(dataset):
 
     prepare_tabel_normalisasi = []
 
-    kriteria = ["C1", "C2", "C3"]
+    # kriteria = ["C1", "C2", "C3"] # dipindah ke atas
     for k in kriteria:
         temp = list()
         a = tb_matriks_nilai_alternatif_df[k]
