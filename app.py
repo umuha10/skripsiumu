@@ -14,7 +14,7 @@ import pymysql.cursors
 DB_SERVER = "localhost"
 DB_USERNAME = "root"
 DB_PASSWORD = ""
-DB_NAME = "umu_ahp_topsis"
+DB_NAME = "spkci4"
 
 conn = cursor = None
 
@@ -50,13 +50,15 @@ def predict_model(dataset):
 
     # kriteria = ["tidak dapat bansos", "kehilangan pekerjaan", "penyakit kronis"]
     kriteria = []
+    skor = []
 
-    sql = "SELECT * FROM kriteria";
+    sql = "SELECT * FROM kriteria"
     cursor.execute(sql)
     results = cursor.fetchall()
 
     for r in results:
         kriteria.append(r[2])
+        # skor.append(r[3])
 
     total_kriteria = len(kriteria)
 
@@ -77,6 +79,8 @@ def predict_model(dataset):
     myRule = rule[index_rule]
 
     tabel_matrik = []
+
+    # print(skor)
 
     for i in range(len(kriteria)): #baris
         temp = []

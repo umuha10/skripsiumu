@@ -28,7 +28,7 @@ class Kriteria extends CI_Controller
     {
         $post = $this->input->post(null, TRUE);
         if ($page == "subkriteria") {
-            var_dump($page);
+            // var_dump($page);
             if (isset($post['insert'])) {
                 $this->Inputkriteria_model->tambahDataSubKriteria($post);
                 redirect('kriteria/subkriteria');

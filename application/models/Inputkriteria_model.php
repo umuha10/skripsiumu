@@ -39,7 +39,8 @@ class Inputkriteria_model extends CI_Model
         $data = [
             'id' => '',
             'id_kriteria' => $post['id_kriteria'],
-            'kriteria' => $post['subkriteria'],
+            'kriteria' => $post['i_kriteria'],
+            'intensitas_kepentingan' => $post['intensitas_kepentingan']
         ];
 
         $this->db->insert('kriteria', $data);
@@ -50,6 +51,7 @@ class Inputkriteria_model extends CI_Model
         $data = [
             'id_kriteria' => $post['up_kriteria'],
             'kriteria' => $post['u_kriteria'],
+            'intensitas_kriteria' => $post['intensitas_kepentingan']
         ];
 
         $this->db->where('id_kriteria', $post['id']);
