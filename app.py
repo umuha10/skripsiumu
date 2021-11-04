@@ -301,10 +301,12 @@ def index():
 
     r = 1
     for d in ranking:
-        latest_ranking[str(d)] = {'KK': nama[d], 'ranking': r}
+        latest_ranking[str(d)] = {'KK': nama[d], 'ranking': r, 'score': ranking[d]}
         r += 1
 
     latest_ranking = dict(latest_ranking)
+
+    print(latest_ranking)
 
     data = {"data": str(latest_ranking)}
 

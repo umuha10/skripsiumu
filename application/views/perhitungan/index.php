@@ -52,12 +52,21 @@
 		data.forEach(dt => {
 			target.forEach(res => {
 				if (dt.KK == res.no_kk) {
-					temp += `<tr>
-						<td>${res.no_kk}</td>
-						<td>${res.nik}</td>
-						<td>${res.nama}</td>
-						<td>${dt.ranking}</td>
-					</tr>`;
+					if (dt.score < 0.4) {
+						temp += `<tr class="bg-danger">
+									<td>${res.no_kk}</td>
+									<td>${res.nik}</td>
+									<td>${res.nama}</td>
+									<td>${dt.ranking}</td>
+								</tr>`;
+					} else {
+						temp += `<tr class="bg-success">
+									<td>${res.no_kk}</td>
+									<td>${res.nik}</td>
+									<td>${res.nama}</td>
+									<td>${dt.ranking}</td>
+								</tr>`;
+					}
 				}
 			});
 		});
@@ -82,8 +91,13 @@
 
 		let tempHasil = [];
 
-		for(let h in hasil) {
-			tempHasil.push({id: h, KK: hasil[h].KK, ranking: hasil[h].ranking});
+		for (let h in hasil) {
+			tempHasil.push({
+				id: h,
+				KK: hasil[h].KK,
+				ranking: hasil[h].ranking,
+				score: hasil[h].score
+			});
 		}
 
 		if (orderBy == 'ASC') {
@@ -99,8 +113,13 @@
 
 			sortable.forEach(s => {
 				tempHasil.forEach(t => {
-					if(s[0] == t.id) {
-						finalResult.push({id: t.id, KK: t.KK, ranking: t.ranking});
+					if (s[0] == t.id) {
+						finalResult.push({
+							id: t.id,
+							KK: t.KK,
+							ranking: t.ranking,
+							score: t.score
+						});
 					}
 				});
 			});
@@ -121,8 +140,13 @@
 
 			sortable.forEach(s => {
 				tempHasil.forEach(t => {
-					if(s[0] == t.id) {
-						finalResult.push({id: t.id, KK: t.KK, ranking: t.ranking});
+					if (s[0] == t.id) {
+						finalResult.push({
+							id: t.id,
+							KK: t.KK,
+							ranking: t.ranking,
+							score: t.score
+						});
 					}
 				});
 			});
@@ -149,8 +173,15 @@
 
 		let data = [];
 
-		for(let h in hasil) {
-			data.push({id: hasil[h].id, KK: hasil[h].KK, ranking: hasil[h].ranking});
+		console.log(hasil)
+
+		for (let h in hasil) {
+			data.push({
+				id: hasil[h].id,
+				KK: hasil[h].KK,
+				ranking: hasil[h].ranking,
+				score: hasil[h].score
+			});
 		}
 
 		drawTable(result, data);
