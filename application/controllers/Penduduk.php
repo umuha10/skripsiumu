@@ -23,6 +23,10 @@ class Penduduk extends CI_Controller
     {
         $post = $this->input->post(null, TRUE);
         if (isset($post['insert'])) {
+            if ($this->Inputpenduduk_model->checkKK($post['i_penduduk'])) {
+                $this->session->set_flashdata('pesan_error', '<div class="alert alert-danger" role="alert">No KK sudah terdaftar</div>');
+                redirect('penduduk');
+            }
             $this->Inputpenduduk_model->tambahDataPenduduk($post);
             redirect('penduduk');
         }

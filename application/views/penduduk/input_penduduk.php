@@ -1,5 +1,12 @@
 <div class="showback mt-3">
 	<div class="card-body">
+		<?php if ($this->session->flashdata('pesan_error')) : ?>
+			<div class="row mt-3">
+				<div class="col-7 mx-auto">
+					<?= $this->session->flashdata('pesan_error') ?>
+				</div>
+			</div>
+		<?php endif; ?>
 		<div class="row mt-3 ">
 			<div class="col-md-10">
 				<h3> Data Penduduk</h3>
@@ -27,9 +34,25 @@
 										<label> Nama *</label>
 										<input type="text" name="k_penduduk" class=" form-control" required>
 										<label> Jenis Kelamin (P/L) *</label>
-										<input type="text" name="l_penduduk" class=" form-control" required>
+										<!-- <input type="text" name="l_penduduk" class=" form-control" required> -->
+										<br>
+										<input type="radio" name="l_penduduk" value="L" checked> Laki-laki<br>
+										<input type="radio" name="l_penduduk" value="P"> Perempuan
+										<br><br>
 										<label> Alamat *</label>
-										<input type="text" name="o_penduduk" class=" form-control" required>
+										<!-- <input type="text" name="o_penduduk" class=" form-control" required> -->
+										<br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 01 RW 01 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 02 RW 01 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 01 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 01 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 01 RW 02 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 02 RW 02 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 02 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 01 RW 03 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 02 RW 03 <br>
+										<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 03 <br>
+										<br>
 										<label> Status Pekerjaan *</label>
 										<select name="p_penduduk" class="form-control" id="bekerja">
 											<!-- <option value="1">Belum Bekerja</option>
@@ -118,9 +141,25 @@
 															<label> Nama *</label>
 															<input type="text" name="c_penduduk" value="<?= $data->nama ?>" class="form-control" required>
 															<label> Jenis Kelamin *</label>
-															<input type="text" name="d_penduduk" value="<?= $data->jenis_kelamin ?>" class="form-control" required>
+															<!-- <input type="text" name="d_penduduk" value="<?= $data->jenis_kelamin ?>" class="form-control" required> -->
+															<br>
+															<input type="radio" name="d_penduduk" value="L" checked> Laki-laki <br>
+															<input type="radio" name="d_penduduk" value="P"> Perempuan
+															<br><br>
 															<label> Alamat *</label>
-															<input type="text" name="g_penduduk" value="<?= $data->alamat ?>" class="form-control" required>
+															<!-- <input type="text" name="g_penduduk" value="<?= $data->alamat ?>" class="form-control" required> -->
+															<br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 01 RW 01 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 02 RW 01 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 01 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 01 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 01 RW 02 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 02 RW 02 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 02 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 01 RW 03 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 02 RW 03 <br>
+															<input type="radio" name="o_penduduk" value="RT 01 RW 01" checked> RT 03 RW 03 <br>
+															<br>
 															<label> Status Pekerjaan *</label>
 															<select name="h_penduduk" class="form-control" id="bekerja">
 																<!-- <option value="1">Belum Bekerja</option>

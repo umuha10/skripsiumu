@@ -9,6 +9,11 @@ class Inputpenduduk_model extends CI_Model
         return $this->db->query($query);
     }
 
+    public function checkKK($KK)
+    {
+        return $this->db->get_where('penduduk', ['no_kk' => $KK])->row_array();
+    }
+
     public function getAllPenduduk()
     {
         $this->db->from('penduduk');
